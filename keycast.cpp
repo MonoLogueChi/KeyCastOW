@@ -1,4 +1,4 @@
-// Copyright 漏 2014 Brook Hong. All Rights Reserved.
+// Copyright ? 2014 Brook Hong. All Rights Reserved.
 //
 
 // msbuild /p:platform=win32 /p:Configuration=Release
@@ -655,7 +655,7 @@ void loadSettings() {
     }
     tcModifiers = GetPrivateProfileInt(L"KeyCastOW", L"tcModifiers", MOD_ALT, iniFile);
     tcKey = GetPrivateProfileInt(L"KeyCastOW", L"tcKey", 0x42, iniFile);
-    GetPrivateProfileString(L"KeyCastOW", L"branding", L"Hi there, press any key to try, double click to configure.", branding, BRANDINGMAX, iniFile);
+    GetPrivateProfileString(L"KeyCastOW", L"branding", L"您好，按任意键尝试，双击配置", branding, BRANDINGMAX, iniFile);
     GetPrivateProfileString(L"KeyCastOW", L"comboChars", L"<->", comboChars, 4, iniFile);
     memset(&labelSettings.font, 0, sizeof(labelSettings.font));
     labelSettings.font.lfCharSet = DEFAULT_CHARSET;
@@ -806,10 +806,10 @@ BOOL CALLBACK SettingsWndProc(HWND hwndDlg, UINT msg, WPARAM wParam, LPARAM lPar
                         desktopRect.right - desktopRect.left - settingsDlgRect.right + settingsDlgRect.left,
                         desktopRect.bottom - desktopRect.top - settingsDlgRect.bottom + settingsDlgRect.top, 0, 0, SWP_NOSIZE);
                 GetWindowRect(hwndDlg, &settingsDlgRect);
-                CreateToolTip(hwndDlg, IDC_COMBSCHEME, L"[+] to display combination keys like [Alt + Tab].");
+                CreateToolTip(hwndDlg, IDC_COMBSCHEME, L"[+] 显示组合键 如 [Alt + Tab].");
                 HWND hCtrl = GetDlgItem(hwndDlg, IDC_ALIGNMENT);
-                ComboBox_InsertString(hCtrl, 0, L"Left");
-                ComboBox_InsertString(hCtrl, 1, L"Right");
+                ComboBox_InsertString(hCtrl, 0, L"左");
+                ComboBox_InsertString(hCtrl, 1, L"右");
             }
             return TRUE;
         case WM_NOTIFY:
@@ -999,12 +999,12 @@ LRESULT CALLBACK WindowFunc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
                 Shell_NotifyIcon( NIM_ADD, &nid );
 
                 hPopMenu = CreatePopupMenu();
-                AppendMenu( hPopMenu, MF_STRING, MENU_CONFIG,  L"&Settings..." );
-                AppendMenu( hPopMenu, MF_STRING, MENU_RESTORE,  L"&Restore default settings" );
+                AppendMenu( hPopMenu, MF_STRING, MENU_CONFIG,  L"&设置..." );
+                AppendMenu( hPopMenu, MF_STRING, MENU_RESTORE,  L"&恢复默认设置" );
 #ifdef _DEBUG
                 AppendMenu( hPopMenu, MF_STRING, MENU_REPLAY,  L"Re&play" );
 #endif
-                AppendMenu( hPopMenu, MF_STRING, MENU_EXIT,    L"E&xit" );
+                AppendMenu( hPopMenu, MF_STRING, MENU_EXIT,    L"退出" );
                 SetMenuDefaultItem( hPopMenu, MENU_CONFIG, FALSE );
             }
             break;
@@ -1165,7 +1165,7 @@ void CreateMiniDump( LPEXCEPTION_POINTERS lpExceptionInfo) {
         CloseHandle( hFile );
 
     } else {
-        printf( ("CreateFile failed. Error: %u \n"), GetLastError() );
+        printf( ("创建文件失败 Error: %u \n"), GetLastError() );
     }
 }
 
@@ -1208,7 +1208,7 @@ int WINAPI WinMain(HINSTANCE hThisInst, HINSTANCE hPrevInst,
     GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     if(!MyRegisterClassEx(hThisInst, szWinName, WindowFunc)) {
-        MessageBox(NULL, L"Could not register window class", L"Error", MB_OK);
+        MessageBox(NULL, L"无法注册窗口类", L"Error", MB_OK);
         return 0;
     }
 
@@ -1225,7 +1225,7 @@ int WINAPI WinMain(HINSTANCE hThisInst, HINSTANCE hPrevInst,
             NULL
             );
     if( !hMainWnd)    {
-        MessageBox(NULL, L"Could not create window", L"Error", MB_OK);
+        MessageBox(NULL, L"无法创建窗口", L"Error", MB_OK);
         return 0;
     }
 
